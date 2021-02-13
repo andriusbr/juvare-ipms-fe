@@ -1,0 +1,58 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "react-app",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:typescript-sort-keys/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react",
+    "prettier/standard"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "react",
+    "import"
+  ],
+  "rules": {
+    "import/order": ["error", {
+      "groups": [
+        ["external", "builtin"],
+        "internal",
+        ["parent", "sibling", "index"]
+      ],
+      "newlines-between": "always",
+      "pathGroupsExcludedImportTypes": ["builtin"]
+    }],
+    "react/prop-types": "off",
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "callbacksLast": true,
+        "ignoreCase": false,
+        "noSortAlphabetically": false,
+        "reservedFirst": false,
+        "shorthandFirst": false,
+        "shorthandLast": true
+      }
+    ]
+  }
+}
