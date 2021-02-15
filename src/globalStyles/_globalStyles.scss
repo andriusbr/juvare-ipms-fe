@@ -1,0 +1,42 @@
+@import './variables';
+
+.row {
+    margin: 10px;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 $smallS;
+    @media screen and (min-width: $tabletMax) {
+        width: 700px;
+    }
+    @media screen and (min-width: $laptopMin) {
+        width: 900px;
+    }
+
+    @media screen and (min-width: $desktopMin) {
+        width: 1024px;
+    }
+
+    @media screen and (min-width: $desktopMax) {
+        width: 1400px;
+    }
+}
+
+.content {
+    flex: 1 0 auto;
+    &-margin {
+        margin: $smallS auto;
+    }
+}
+
+.footer {
+    background: #f7f7f7;
+    border-top: 1px solid #e8e8e8;
+    bottom: 0;
+    height: 20px;
+    padding: $smallS 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}

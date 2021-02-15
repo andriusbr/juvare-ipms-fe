@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import './globalStyles/_globalStyles.scss';
 import './index.css';
 
 ReactDOM.render(
