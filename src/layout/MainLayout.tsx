@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Footer from '../view/component/Footer/Footer';
 import NavBar from '../view/component/NavBar/NavBar';
 
 interface ILayout {
@@ -13,7 +14,8 @@ const MainLayout: React.FC<ILayout> = ({ children, authenticated }) => {
             <header>
                 <NavBar authenticated={authenticated} />
             </header>
-            <div>{children}</div>
+            <div className="content content-margin container">{children}</div>
+            <Footer />
         </>
     );
 };
