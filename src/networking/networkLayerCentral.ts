@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
 
+import { Routes } from '../constant/Routes';
 import { JWTService } from '../service/JWTService';
 
 export const BASE_URL = process.env.REACT_APP_API_URL;
@@ -27,8 +28,8 @@ const request = async function (options: AxiosRequestConfig, contentType = '') {
     };
 
     const onError = async function (error: AxiosError) {
-        if (error.response?.status === 403) {
-            // TODO redirect to login
+        if (error.response?.status === 401) {
+            window.location.href = Routes.LOGIN;
         }
         return Promise.reject(error);
     };
