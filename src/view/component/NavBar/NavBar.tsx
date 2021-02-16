@@ -37,14 +37,14 @@ const NavBar: React.FC<INavBar> = ({ authenticated }) => {
         <AppBar color="primary" position="static">
             <Toolbar>
                 <Typography className={classes.navBarMainLink} variant="h6">
-                    <NavLink className={classes.navBarLink} to={Routes.HOME_PAGE}>
+                    <NavLink className={classes.navBarLink} to={Routes.INCIDENTS}>
                         IPMS
                     </NavLink>
                 </Typography>
 
                 {authenticated && (
-                    <NavLink className={classes.navBarLink} to={Routes.HOME_PAGE}>
-                        Home
+                    <NavLink className={classes.navBarLink} to={Routes.INCIDENTS}>
+                        Incidents
                     </NavLink>
                 )}
 

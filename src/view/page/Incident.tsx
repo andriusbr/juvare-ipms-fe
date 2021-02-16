@@ -5,42 +5,43 @@ import { Button, Grid } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { AxiosError } from 'axios';
 
-import { ILoginForm } from '../../store/login/loginForm';
-import { Auth } from '../../networking/authApi';
-import { JWTService } from '../../service/JWTService';
+import { Incidents } from '../../networking/incidentApi';
 import { Routes } from '../../constant/Routes';
 import PageWrapper from '../component/Wrapper/PageWrapper';
 import CustomTextField from '../component/Input/CustomTextField';
+import { IIncident } from '../../store/incident/incident';
 
-const validate = (values: ILoginForm) => {
-    const errors: FormikErrors<ILoginForm> = {};
-    if (!values.username) {
-        errors.username = 'Username is required';
+const validate = (values: IIncident) => {
+    const errors: FormikErrors<IIncident> = {};
+    if (!values.name) {
+        errors.name = 'Incident name is required';
     }
-    if (!values.password) {
-        errors.password = 'Password is required';
+    if (!values.start_date) {
+        errors.start_date = 'Start date is required';
+    } else {
+        const currDate = new Date();
+        currDate.setHours(23, 59, 59);
+        if (new Date(values.start_date) > currDate) {
+            errors.start_date = 'Start date cannot be greater than the current date';
+        }
     }
 
     return errors;
 };
 
-const Login: React.FC = () => {
+const Incident: React.FC = () => {
     const history = useHistory();
     const [error, setError] = useState<string>();
 
-    const initialValues: ILoginForm = {
-        username: '',
-        password: '',
+    const initialValues: IIncident = {
+        name: '',
+        start_date: '',
     };
 
-    const submitLoginForm = (values: ILoginForm) => {
-        Auth.login(values)
-            .then((response) => {
-                JWTService.setAccessToken(
-                    response.data.access_token,
-                    response.data.expiration_in_minutes,
-                );
-                history.replace(Routes.INCIDENTS);
+    const submitIncidentForm = (values: IIncident) => {
+        Incidents.create(values)
+            .then(() => {
+                history.push(Routes.INCIDENTS);
             })
             .catch((err: AxiosError<Error>) => {
                 setError(
@@ -56,14 +57,14 @@ const Login: React.FC = () => {
         initialValues: initialValues,
         validateOnChange: false,
         validate,
-        onSubmit: submitLoginForm,
+        onSubmit: submitIncidentForm,
     });
 
     return (
         <Grid justify="center" container>
             <Grid md={4} sm={8} xs={12} item>
-                <PageWrapper title="Login">
-                    <form id="loginForm" onSubmit={formik.handleSubmit}>
+                <PageWrapper title="New Incident">
+                    <form id="incidentForm" onSubmit={formik.handleSubmit}>
                         {error && (
                             <div className="row">
                                 <Alert severity="error">{error}</Alert>
@@ -71,16 +72,12 @@ const Login: React.FC = () => {
                         )}
                         <div className="row">
                             <CustomTextField
-                                error={!!formik.errors.username}
-                                helperText={formik.errors.username}
-                                id="username"
-                                label="Username"
-                                name="username"
-                                value={
-                                    formik.values.username
-                                        ? formik.values.username
-                                        : initialValues.username
-                                }
+                                error={!!formik.errors.name}
+                                helperText={formik.errors.name}
+                                id="name"
+                                label="Incident name"
+                                name="name"
+                                value={formik.values.name ? formik.values.name : initialValues.name}
                                 variant="outlined"
                                 onChange={formik.handleChange}
                             />
@@ -88,16 +85,16 @@ const Login: React.FC = () => {
 
                         <div className="row">
                             <CustomTextField
-                                error={!!formik.errors.password}
-                                helperText={formik.errors.password}
-                                id="password"
-                                label="Password"
-                                name="password"
-                                type="password"
+                                error={!!formik.errors.start_date}
+                                helperText={formik.errors.start_date}
+                                id="start_date"
+                                label="Start date"
+                                name="start_date"
+                                type="date"
                                 value={
-                                    formik.values.password
-                                        ? formik.values.password
-                                        : initialValues.password
+                                    formik.values.start_date
+                                        ? formik.values.start_date
+                                        : initialValues.start_date
                                 }
                                 variant="outlined"
                                 onChange={formik.handleChange}
@@ -107,11 +104,11 @@ const Login: React.FC = () => {
                         <Grid justify="center" container>
                             <Button
                                 color="default"
-                                form="loginForm"
+                                form="incidentForm"
                                 type="submit"
                                 variant="contained"
                             >
-                                Login
+                                Create
                             </Button>
                         </Grid>
                     </form>
@@ -121,4 +118,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default Login;
+export default Incident;
