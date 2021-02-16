@@ -40,7 +40,7 @@ const Login: React.FC = () => {
                     response.data.access_token,
                     response.data.expiration_in_minutes,
                 );
-                history.replace(Routes.HOME_PAGE);
+                history.replace(Routes.INCIDENTS);
             })
             .catch((err: AxiosError<Error>) => {
                 setError(

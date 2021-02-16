@@ -12,7 +12,7 @@ const useStyles = makeStyles(() =>
 const CustomTextField: React.FC<TextFieldProps> = ({ ...rest }: TextFieldProps) => {
     const classes = useStyles();
 
-    return <TextField className={classes.input} {...rest} />;
+    return <TextField InputLabelProps={{ shrink: true }} className={classes.input} {...rest} />;
 };
 
 export default CustomTextField;
