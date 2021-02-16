@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormikErrors, useFormik } from 'formik';
 import { Alert } from '@material-ui/lab';
-import { Button, Grid } from '@material-ui/core';
+import { Box, Button, Grid } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { AxiosError } from 'axios';
 
@@ -102,14 +102,21 @@ const Incident: React.FC = () => {
                         </div>
 
                         <Grid justify="center" container>
-                            <Button
-                                color="default"
-                                form="incidentForm"
-                                type="submit"
-                                variant="contained"
-                            >
-                                Create
-                            </Button>
+                            <Box mx={1}>
+                                <Button
+                                    color="primary"
+                                    form="incidentForm"
+                                    type="submit"
+                                    variant="contained"
+                                >
+                                    Create
+                                </Button>
+                            </Box>
+                            <Box mx={1}>
+                                <Button color="default" href={Routes.INCIDENTS} variant="contained">
+                                    Cancel
+                                </Button>
+                            </Box>
                         </Grid>
                     </form>
                 </PageWrapper>

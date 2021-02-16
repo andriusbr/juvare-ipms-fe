@@ -71,7 +71,7 @@ const Incidents: React.FC = () => {
 
     return (
         <Grid justify="center" container>
-            <Grid md={8} sm={10} xs={12} item>
+            <Grid lg={8} md={10} sm={12} item>
                 <PageWrapper title="Incidents">
                     <EnhancedTable
                         Actions={Actions}

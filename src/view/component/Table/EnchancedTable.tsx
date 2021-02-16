@@ -25,16 +25,6 @@ interface EnhancedTableHeadProps {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        root: {
-            width: '100%',
-        },
-        paper: {
-            width: '100%',
-            marginBottom: theme.spacing(2),
-        },
-        table: {
-            minWidth: 750,
-        },
         visuallyHidden: {
             border: 0,
             clip: 'rect(0 0 0 0)',
@@ -132,8 +122,8 @@ const EnhancedTable: React.FC<EnhancedTableProps> = ({
     };
 
     return (
-        <div className={classes.root}>
-            <Paper className={classes.paper}>
+        <div>
+            <Paper>
                 <div style={{ height: 8 }}>{isLoading && <LinearProgress />}</div>
                 <div
                     style={{
@@ -155,7 +145,7 @@ const EnhancedTable: React.FC<EnhancedTableProps> = ({
                     />
                 </div>
                 <TableContainer>
-                    <Table className={classes.table} size={'medium'}>
+                    <Table size={'medium'}>
                         <EnhancedTableHead header={header} />
                         <TableBody>
                             {data?.content.map((row) => {

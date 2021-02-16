@@ -1,6 +1,8 @@
 import React from 'react';
 import { AppBar, createStyles, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
+import ExitIcon from '@material-ui/icons/PowerSettingsNew';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { Routes } from '../../../constant/Routes';
 import { JWTService } from '../../../service/JWTService';
@@ -22,6 +24,10 @@ const useStyles = makeStyles(() =>
         },
         navBarMainLink: {
             marginRight: 20,
+        },
+        navLinkIcon: {
+            verticalAlign: 'middle',
+            marginRight: 5,
         },
     }),
 );
@@ -51,10 +57,12 @@ const NavBar: React.FC<INavBar> = ({ authenticated }) => {
                 <section className={classes.rightToolbar}>
                     {!authenticated ? (
                         <NavLink className={classes.navBarLink} to={Routes.LOGIN}>
+                            <ExitToAppIcon className={classes.navLinkIcon} />
                             Login
                         </NavLink>
                     ) : (
                         <NavLink className={classes.navBarLink} to={Routes.LOGIN} onClick={logout}>
+                            <ExitIcon className={classes.navLinkIcon} />
                             Logout
                         </NavLink>
                     )}
