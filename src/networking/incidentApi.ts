@@ -6,4 +6,7 @@ import RequestType from './networkLayerCentral';
 const create = (incident: IIncident): AxiosPromise<any> =>
     RequestType.postRequest('/incident', JSON.stringify(incident));
 
-export const Incidents = { create };
+const getIncidents = (requestParams: string): AxiosPromise<any> =>
+    RequestType.getRequest('/incident', requestParams);
+
+export const Incidents = { create, getIncidents };
